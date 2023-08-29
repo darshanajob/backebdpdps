@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Models\Tax;
 use App\Models\Teachers;
 use App\Models\WaterSupply;
 use App\Reposi;
@@ -56,6 +57,28 @@ class Repository{
             'token' => $token
         ];
         return $responce;
+    }
+
+    public function addNewTax($fields){
+        $taxCal = Tax::findbynic($fields->nic);
+        if($taxCal){
+            $taxCal = Tax::create([
+                'name' => $fields['name'],
+                'nic' => $fields['nic'],
+                'ammount' => $fields['ammount'],
+                'account' => $fields['account'],
+            ]);
+        }else{
+            $taxCal->name =  $fields['name'];
+            $taxCal->nic =  $fields['nic'];
+            $taxCal->ammount =  $fields['ammount'];
+            $taxCal->account =  $fields['account'];
+            $taxCal->save();
+        }
+
+        return [
+            'tax' => $taxCal,
+        ];
     }
 }
 
