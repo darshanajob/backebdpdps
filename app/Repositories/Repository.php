@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories;
+use App\Models\Payments;
 use App\Models\Tax;
 use App\Models\Teachers;
 use App\Models\WaterSupply;
@@ -65,19 +66,39 @@ class Repository{
             $taxCal = Tax::create([
                 'name' => $fields['name'],
                 'nic' => $fields['nic'],
-                'ammount' => $fields['ammount'],
+                'amount' => $fields['amount'],
                 'account' => $fields['account'],
+                'telephone' => $fields['telephone'],
+                'description' => $fields['description'],
+                'email' => $fields['email'],
+            ]);
+            $taxId = Tax::latest()->first();
+            $payment = Payments::create([
+                'year' => $fields['year'],
+                'amount' => $fields['amount'],
+                'tax_id' => $taxId,
+                'payment_type' => $fields['payment_type']
             ]);
         }else{
-            $taxCal->name =  $fields['name'];
+       /*     $taxCal->name =  $fields['name'];
             $taxCal->nic =  $fields['nic'];
             $taxCal->ammount =  $fields['ammount'];
             $taxCal->account =  $fields['account'];
-            $taxCal->save();
+            $taxCal->ammount =  $fields['ammount'];
+            $taxCal->telephone =  $fields['telephone'];
+            $taxCal->description =  $fields['description'];
+            $taxCal->save();*/
+
+            $payment = Payments::create([
+                'year' => $fields['year'],
+                'amount' => $fields['amount'],
+                'tax_id' => $taxCal->id,
+                'payment_type' => $fields['payment_type']
+            ]);
         }
 
         return [
-            'tax' => $taxCal,
+            'tax' => $payment,
         ];
     }
 }
