@@ -6,7 +6,8 @@ use App\Models\Teachers;
 use App\Models\WaterSupply;
 use App\Reposi;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CustomEmail;
 
 class Repository{
  /*   public function registerNew(array $data){
@@ -53,6 +54,10 @@ class Repository{
             'user_id ' => $user->id,
         ]);
 
+        $recipient = "chinadaredareya@gmail.com";
+        $subject = "test";
+        $messagesss = "hutho";
+        Mail::to($data['email'])->send(new CustomEmail($messagesss));
         $responce = [
             'teacher' => $teacher,
             'token' => $token
