@@ -126,6 +126,41 @@ class Repository{
             'tax' => $payment,
         ];
     }
+
+    public function login(Request $request)
+    {
+        $fields = $request->validate([
+            'nic' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        //check NIC
+        $user = User::whereNic($fields['nic'])->with('roles')->first();
+
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
+            throw new NotFoundHttpException('Please check NIC or Password !');
+        } else {
+            if ($user->status === "Disable") {
+                throw new UnauthorizedHttpException(
+                    "Account Is Disabled! Please Contact Administrator.",
+                    "Account Is Disabled! Please Contact Administrator."
+                );
+            }
+        }
+
+        $token = $user->createToken('apptoken')->plainTextToken;
+
+        $responce = [
+            'user' => $user,
+            'token' => $token,
+        ];
+
+        //return response($responce, 201);
+        return response([
+            'message' => $responce
+        ], 200);
+    }
+
 }
 
 
