@@ -30,9 +30,11 @@ class AuthController extends Controller
                 'password' => 'string|confirmed',
                 'is_active' => 'required',
                 'type' => 'required',
-                'name' => 'required'
+                'name' => 'required',
+                'nic' => 'required',
+                'mobileNo' => 'required'
             ]);
-            $response = $this->repository->registerNew($data);
+            $response = $this->repository->registerNew($fields);
           //  $response = $this->teacherRepository->updatePassword($id, $fields, $request);
             return response($response, 201);
 

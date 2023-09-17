@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/watersup', \App\Http\Controllers\WaterSupplyController::class);
 Route::apiResource('/addTax', \App\Http\Controllers\TaxController::class);
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
