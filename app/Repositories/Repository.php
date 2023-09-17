@@ -9,25 +9,31 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CustomEmail;
 
+use Vonage\Client\Credentials\Basic;
+use Vonage\Client;
+use Vonage\SMS\Message\SMS;
+use Vonage\SMS\Message\SMSCollection;
+
 class Repository{
- /*   public function registerNew(array $data){
-        $token = $user->createToken('apptoken')->plainTextToken;
-        $user->assignRole('admin');
+    public function registerNew(array $data){
+
         $user = User::create([
             'nic' => $data['nic'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'mobileNo' => $data['mobileNo'],
-            'name' => $data['name']
+            'name' => $data['name'],
+            'is_active' => $data['is_active'],
+            'type' => $data['type'],
         ]);
-
+        $token = $user->createToken('apptoken')->plainTextToken;
+        $user->assignRole('admin');
         $responce = [
             'user' => $user,
             'token' => $token,
 
         ];
         return response($responce, 201);
-    }*/
+    }
 
     public function addNewWater(array $data){
 
@@ -54,10 +60,24 @@ class Repository{
             'user_id ' => $user->id,
         ]);
 
+        $basic  = new \Vonage\Client\Credentials\Basic("831cb65a", "LVg6EEtYjLd5vJ6A");
+        $client = new \Vonage\Client($basic);
+        $responsessssss = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("94778590204",  'PDPS', 'Call me if u get this A text message sent using the Nexmo SMS API')
+        );
+        $message = $responsessssss->current();
+
+        if ($message->getStatus() == 0) {
+            return "The message was sent successfully\n ";
+        } else {
+            return "The message failed with status: " . $message->getStatus() . "\n";
+        }
+
         $recipient = "chinadaredareya@gmail.com";
         $subject = "test";
         $messagesss = "hutho";
         Mail::to($data['email'])->send(new CustomEmail($messagesss));
+
         $responce = [
             'teacher' => $teacher,
             'token' => $token

@@ -85,6 +85,16 @@ return [
                 'log',
             ],
         ],
+        'brevo' => [
+            'driver' => 'brevo',
+            'key' => env('BREVO_API_KEY'),
+        ],
+        'vonage' => [
+            'driver' => 'vonage',
+            'key' => env('VONAGE_API_KEY'),
+            'secret' => env('VONAGE_API_SECRET'),
+            'from' => env('VONAGE_FROM'),
+        ],
     ],
 
     /*

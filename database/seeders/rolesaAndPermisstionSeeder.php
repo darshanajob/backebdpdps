@@ -35,19 +35,19 @@ class rolesaAndPermisstionSeeder extends Seeder
         Permission::create(['name' => $addStudent]);
         Permission::create(['name' => $addPayment]);
         Permission::create(['name' => $addCommis]);
-          Permission::create(['name' => $updateAgent]);
+        Permission::create(['name' => $updateAgent]);
 
         $superAdmin = 'admin';
         $GS = 'gramasewaka';
         $customer = 'customer';
         $member = 'member';
-    
+
 
 
 
         Role::create(['name' => $superAdmin])->givePermissionTo(Permission::all());
        // Role::create(['name' => $teacher])->givePermissionTo(Permission::all());
-     
+
         Role::create(['name' => $GS])->givePermissionTo(
             $addUser,
             $editUser,
