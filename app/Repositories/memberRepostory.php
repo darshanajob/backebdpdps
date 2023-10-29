@@ -31,7 +31,7 @@ class memberRepostory{
         $member->member_parties_id = $request->input('member_parties_id');
 
         $memberId = User::latest()->first()->id;
-        $member->user_id = $memberId
+        $member->user_id = $memberId;
         $member->save();
         $member->assignRole('member');
         $responce = [
