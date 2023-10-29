@@ -28,7 +28,8 @@ return new class extends Migration
             $table->boolean('is_married');
             $table->boolean('is_registered');
             $table->integer('member_divisions_id');
-            $table->integer('member_parties_id');                    
+            $table->integer('member_parties_id');
+            $table->integer('user_id');
         });
     }
 
