@@ -69,7 +69,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-
+//
     }
 
     /**
