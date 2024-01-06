@@ -89,9 +89,9 @@ class Repository{
             return "The message failed with status: " . $message->getStatus() . "\n";
         }
 
-        $recipient = "chinadaredareya@gmail.com";
-        $subject = "test";
-        $messagesss = "hutho";
+        $recipient = "asanka.lakshitha@gmail.com";
+        $subject = "Water Supply Application";
+        $messagesss = "Your application submitted Successfully";
         Mail::to($data['email'])->send(new CustomEmail($messagesss));
 
         $responce = [
