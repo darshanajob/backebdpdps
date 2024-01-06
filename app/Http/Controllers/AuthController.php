@@ -17,8 +17,10 @@ class AuthController extends Controller
 
 
     public function register(Request $request){
+
         define("Admin", 1);
         define("GS", 2);
+
         $fields = $request->validate([
             'requesttype' => 'required'
         ]);
@@ -39,5 +41,10 @@ class AuthController extends Controller
             return response($response, 201);
 
         }
+    }
+    public function login(Request $request){
+
+        $response = $this->repository->login($request);
+        return response($response, 201);
     }
 }
