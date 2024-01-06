@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('complains', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('topic',300);
+            $table->string('cname',100);
+            $table->integer('tele',10);
+            $table->string('complain',1000);
             $table->date('complain_date');
             $table->string('img1');
             $table->string('img2');
             $table->string('img3');
-            $table->tinyInteger('status');
         });
     }
 
