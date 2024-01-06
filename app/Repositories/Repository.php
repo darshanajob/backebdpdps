@@ -1,14 +1,18 @@
 <?php
 namespace App\Repositories;
+use App\Models\Complain;
 use App\Models\Payments;
 use App\Models\Tax;
 use App\Models\Teachers;
 use App\Models\WaterSupply;
 use App\Reposi;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CustomEmail;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Vonage\Client\Credentials\Basic;
 use Vonage\Client;
 use Vonage\SMS\Message\SMS;
@@ -33,6 +37,15 @@ class Repository{
 
         ];
         return response($responce, 201);
+    }
+
+    public function addComplain(array $data){
+        $complain = Complain::create([
+
+            'topic' => $data['topic'],
+            'complain_date' => $data['complain_date'],
+            'status' => $data['status'],
+        ]);
     }
 
     public function addNewWater(array $data){
@@ -127,18 +140,19 @@ class Repository{
         ];
     }
 
-    public function login(Request $request)
+    public function  login($request)
     {
+       // return $request;
         $fields = $request->validate([
-            'nic' => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
         //check NIC
-        $user = User::whereNic($fields['nic'])->with('roles')->first();
+        $user = User::whereEmail($fields['email'])->with('roles')->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
-            throw new NotFoundHttpException('Please check NIC or Password !');
+            throw new NotFoundHttpException('Please check email or Password !');
         } else {
             if ($user->status === "Disable") {
                 throw new UnauthorizedHttpException(
@@ -150,7 +164,7 @@ class Repository{
 
         $token = $user->createToken('apptoken')->plainTextToken;
 
-        $responce = [
+        return  $responce = [
             'user' => $user,
             'token' => $token,
         ];

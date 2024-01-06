@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('/watersup', \App\Http\Controllers\WaterSupplyController::class);
 Route::apiResource('/addTax', \App\Http\Controllers\TaxController::class);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
 
 
