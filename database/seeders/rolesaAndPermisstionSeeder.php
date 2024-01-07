@@ -41,6 +41,7 @@ class rolesaAndPermisstionSeeder extends Seeder
         $GS = 'gramasewaka';
         $customer = 'customer';
         $member = 'member';
+        $officer = 'officer';
 
 
 
@@ -61,6 +62,12 @@ class rolesaAndPermisstionSeeder extends Seeder
             $addCommis
         );
         Role::create(['name' => $member])->givePermissionTo(
+            $addUser,
+            $editUser,
+            $addPayment,
+            $addCommis
+        );
+        Role::create(['name' => $officer])->givePermissionTo(
             $addUser,
             $editUser,
             $addPayment,
