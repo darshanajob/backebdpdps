@@ -78,4 +78,12 @@ class ComplainController extends Controller
     {
         //
     }
+    public function getCount()
+    {
+        $count = $this->repository->getComplainCount();
+        $response = [
+            "count" => $count,
+        ];
+        return response($response, 200);
+    }
 }
