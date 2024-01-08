@@ -19,6 +19,8 @@ Route::apiResource('/news', \App\Http\Controllers\NewsController::class);
 Route::apiResource('/addTax', \App\Http\Controllers\TaxController::class);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/newscount',[\App\Http\Controllers\NewsController::class,'getNewsCount']);
+Route::get('/count',[\App\Http\Controllers\ComplainController::class,'getCount']);
 
 
 

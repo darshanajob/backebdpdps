@@ -18,7 +18,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = news::with("newsLocales")->get();
+        $response = [
+            "AllNews" => $news,
+        ];
+        return response($response, 200);
     }
 
     /**
@@ -73,5 +77,13 @@ class NewsController extends Controller
     public function destroy(news $news)
     {
         //
+    }
+    public function getNewsCount()
+    {
+        $count = $this->repository->getPublishedNewsCount();
+        $response = [
+            "count" => $count,
+        ];
+        return response($response, 200);
     }
 }

@@ -13,7 +13,12 @@ class news extends Model
         'visibility',
         'priority',
         'display_start_date',
-        'display_end_date'
+        'display_end_date',
+        'published',
 
     ];
+    public function newsLocales()
+    {
+        return $this->hasMany(News_locales::class, 'news_id');
+    }
 }

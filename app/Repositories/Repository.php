@@ -205,6 +205,14 @@ class Repository{
             'news details' => $detailNews
         ], 200);
     }
+    public function getPublishedNewsCount()
+    {
+        return News::where('published', true)->count();
+    }
+    public function getComplainCount()
+    {
+        return Complain::count();
+    }
 
 }
 
