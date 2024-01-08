@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complain;
-use App\Http\Controllers\Controller;
-use App\Repositories\Repository;
+use App\Repositories\ComplainRepository;
 use Illuminate\Http\Request;
 
 class ComplainController extends Controller
 {
-    public function __construct(Repository $repository)
+    private $repository;
+
+    public function __construct(ComplainRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -18,7 +19,8 @@ class ComplainController extends Controller
      */
     public function index()
     {
-        //
+        return Complain::all();
+
     }
 
     /**
@@ -34,22 +36,21 @@ class ComplainController extends Controller
      */
     public function store(Request $request)
     {
+        //return($request);
         $fields = $request->validate([
-            'topic' => 'required',
-            'complain_date' => 'required',
-            'img1' => 'string',
-            'img2' => 'required',
-            'status' => 'required'
-
+            'complain' => 'required',
+            //'complain_date' => 'required',
+            'cname' => 'string',
         ]);
-        $responce = $this->repository->addComplain($fields);
+
+        $responce = $this->repository->addComplain($request);
         return response($responce, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Complain $complain)
+    public function show(Complain $Complain)
     {
         //
     }
@@ -57,7 +58,7 @@ class ComplainController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Complain $complain)
+    public function edit(Complain $Complain)
     {
         //
     }
@@ -65,7 +66,7 @@ class ComplainController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Complain $complain)
+    public function update(Request $request, Complain $Complain)
     {
         //
     }
@@ -73,7 +74,7 @@ class ComplainController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Complain $complain)
+    public function destroy(Complain $Complain)
     {
         //
     }

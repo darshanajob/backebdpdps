@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class TreeCutRequestDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'visibility',
-        'priority',
-        'display_start_date',
-        'display_end_date',
+        'tree_type',
+        'tree_count',
+        'tree_cut_requests_id',
     ];
 }
 /*
-    1 (News) : 1 (NewsLocale)
+    1 (TreeCutRequest) : M (TreeCutRequestDetail)
 */

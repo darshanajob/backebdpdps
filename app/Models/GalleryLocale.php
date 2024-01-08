@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class GalleryLocale extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'visibility',
-        'priority',
-        'display_start_date',
-        'display_end_date',
+        'album_desc_si',
+        'album_desc_en',
+        'album_desc_ta',
     ];
 }
 /*
-    1 (News) : 1 (NewsLocale)
+    1(GalleryLocale) : M (Gallery)
 */

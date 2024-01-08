@@ -9,11 +9,17 @@ class Complain extends Model
 {
     use HasFactory;
     protected $table = 'complains';
+
     protected $fillable = [
-        'topic',
+        'cname',
+        'tele',
+        'complain',
         'complain_date',
         'img1',
         'img2',
-        'status'
+        'img3',
     ];
 }
+/*
+    1(Complain) : M (ComplainAction)
+*/

@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
+use App\Models\OfficerSubject;
 use Illuminate\Http\Request;
+use App\Repositories\OfficerRepository;
 
-class NewsController extends Controller
+
+class OfficerSubjectController extends Controller
 {
+
+
+    public function __construct(OfficerRepository $OfficerRepository)
+    {
+        $this->OfficerRepository = $OfficerRepository;
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +44,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'subject' => 'required',
+        ]);
+
+        $response = $this->OfficerRepository->addSubject($request);
+        return response($response, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerSubject  $officerSubject
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(OfficerSubject $officerSubject)
     {
         //
     }
@@ -52,10 +66,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerSubject  $officerSubject
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(OfficerSubject $officerSubject)
     {
         //
     }
@@ -64,10 +78,10 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerSubject  $officerSubject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, OfficerSubject $officerSubject)
     {
         //
     }
@@ -75,10 +89,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerSubject  $officerSubject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(OfficerSubject $officerSubject)
     {
         //
     }

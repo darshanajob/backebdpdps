@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
+use App\Models\TreeCutRespond;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class TreeCutRespondController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\TreeCutRespond  $treeCutRespond
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(TreeCutRespond $treeCutRespond)
     {
         //
     }
@@ -52,10 +52,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\TreeCutRespond  $treeCutRespond
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(TreeCutRespond $treeCutRespond)
     {
         //
     }
@@ -64,10 +64,10 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\TreeCutRespond  $treeCutRespond
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, TreeCutRespond $treeCutRespond)
     {
         //
     }
@@ -75,10 +75,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\TreeCutRespond  $treeCutRespond
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(TreeCutRespond $treeCutRespond)
     {
         //
     }

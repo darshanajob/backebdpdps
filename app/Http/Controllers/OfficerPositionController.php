@@ -1,17 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\News;
+use App\Repositories\OfficerRepository;
+use App\Models\OfficerPosition;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class OfficerPositionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function __construct(OfficerRepository $OfficerRepository)
+    {
+        $this->OfficerRepository = $OfficerRepository;
+
+    }
+
     public function index()
     {
         //
@@ -35,16 +44,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'position' => 'required',
+        ]);
+
+        $responce = $this->OfficerRepository->addPosition($request);
+        return response($responce, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerPosition  $officerPosition
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(OfficerPosition $officerPosition)
     {
         //
     }
@@ -52,10 +66,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerPosition  $officerPosition
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(OfficerPosition $officerPosition)
     {
         //
     }
@@ -64,10 +78,10 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerPosition  $officerPosition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, OfficerPosition $officerPosition)
     {
         //
     }
@@ -75,10 +89,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\OfficerPosition  $officerPosition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(OfficerPosition $officerPosition)
     {
         //
     }

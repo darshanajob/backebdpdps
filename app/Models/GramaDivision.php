@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class GramaDivision extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'visibility',
-        'priority',
-        'display_start_date',
-        'display_end_date',
+        'division',
     ];
 }
 /*
-    1 (News) : 1 (NewsLocale)
+    1 (Grama) : 1 (GramaDivision)
 */
