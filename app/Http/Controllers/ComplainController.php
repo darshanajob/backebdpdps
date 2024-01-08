@@ -80,7 +80,7 @@ class ComplainController extends Controller
     }
     public function getCount()
     {
-        $count = $this->repository->getComplainCount();
+        $count = Complain::count();
         $response = [
             "count" => $count,
         ];

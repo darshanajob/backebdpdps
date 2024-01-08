@@ -223,7 +223,12 @@ class Repository{
     {
         return News::where('published', true)->count();
     }
-    public function getComplainCount()
+    public function getComplainCounts()
+    {
+        return Complain::count();
+    }
+
+    public function complainCount()
     {
         return Complain::count();
     }
