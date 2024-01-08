@@ -23,7 +23,7 @@ class OfficerPositionController extends Controller
 
     public function index()
     {
-        //
+        return OfficerPosition::all();
     }
 
     /**

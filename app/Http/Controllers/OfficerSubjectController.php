@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OfficersOfficerSubject;
 use App\Models\OfficerSubject;
 use Illuminate\Http\Request;
 use App\Repositories\OfficerRepository;
@@ -23,7 +24,7 @@ class OfficerSubjectController extends Controller
      */
     public function index()
     {
-        //
+        return OfficerSubject::all();
     }
 
     /**

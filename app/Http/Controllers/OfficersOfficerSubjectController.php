@@ -14,7 +14,7 @@ class OfficersOfficerSubjectController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

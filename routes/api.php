@@ -24,6 +24,7 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/activate', [\App\Http\Controllers\AuthController::class, 'activate']);
 Route::apiResource('/addPosition', \App\Http\Controllers\OfficerPositionController::class);
 Route::apiResource('/addSubject', \App\Http\Controllers\OfficerSubjectController::class);
+Route::apiResource('/officer', \App\Http\Controllers\OfficerController::class);
 
 Route::get('/newscount',[\App\Http\Controllers\NewsController::class,'getNewsCount']);
 Route::get('/count',[\App\Http\Controllers\ComplainController::class,'getCount']);
