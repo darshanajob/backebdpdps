@@ -19,18 +19,38 @@ use Vonage\SMS\Message\SMS;
 use Vonage\SMS\Message\SMSCollection;
 
 class Repository{
-    public function registerNew(array $data){
-
+    public function registerNew($data){
+    //return $data;
         $user = User::create([
             'nic' => $data['nic'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
             'name' => $data['name'],
             'is_active' => $data['is_active'],
             'type' => $data['type'],
+            'requesttype' => $data['requesttype'],
         ]);
         $token = $user->createToken('apptoken')->plainTextToken;
-        $user->assignRole('admin');
+        switch ($data['requesttype']) {
+            case '1':
+                $user->assignRole('admin');
+                break;
+            case '5':
+                $user->assignRole('officer');
+                break;
+            case '2':
+                $user->assignRole('gramasewaka');
+                break;
+            case '4':
+                $user->assignRole('member');
+                break;
+            case '3':
+                $user->assignRole('customer');
+                break;
+            // Add more cases if needed
+            default:
+                // Handle any other cases or throw an exception if needed
+        }
+
         $responce = [
             'user' => $user,
             'token' => $token,
@@ -39,14 +59,7 @@ class Repository{
         return response($responce, 201);
     }
 
-    public function addComplain(array $data){
-        $complain = Complain::create([
 
-            'topic' => $data['topic'],
-            'complain_date' => $data['complain_date'],
-            'status' => $data['status'],
-        ]);
-    }
 
     public function addNewWater(array $data){
 
@@ -148,13 +161,14 @@ class Repository{
             'password' => 'required|string',
         ]);
 
-        //check NIC
+        //check email
         $user = User::whereEmail($fields['email'])->with('roles')->first();
+
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             throw new NotFoundHttpException('Please check email or Password !');
         } else {
-            if ($user->status === "Disable") {
+            if ($user->is_active === 0) {
                 throw new UnauthorizedHttpException(
                     "Account Is Disabled! Please Contact Administrator.",
                     "Account Is Disabled! Please Contact Administrator."
