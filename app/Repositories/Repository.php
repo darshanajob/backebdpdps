@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories;
 use App\Models\Complain;
+use App\Models\news;
+use App\Models\News_locales;
 use App\Models\Payments;
 use App\Models\Tax;
 use App\Models\Teachers;
@@ -10,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CustomEmail;
+use Carbon\Carbon;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -155,7 +158,7 @@ class Repository{
 
     public function  login($request)
     {
-       // return $request;
+        //return $request;
         $fields = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
@@ -187,6 +190,42 @@ class Repository{
         return response([
             'message' => $responce
         ], 200);
+    }
+
+    public function addNewNews($data){
+       // return $data;
+        $displayStartDate = Carbon::parse($data['displayStartDate'])->format('Y-m-d H:i:s');
+        $displayEndDate = Carbon::parse($data['displayEndDate'])->format('Y-m-d H:i:s');
+
+        $news = news::create([
+            'visibility' => $data['isChecked'],
+            'priority' => $data['isPriority'],
+            'display_start_date' => $displayStartDate,
+            'display_end_date' => $displayEndDate,
+            'updated_at' => now(),
+            'created_at' => now(),
+        ]);
+        $newsId = news::latest()->first()->id;;
+        $detailNews = News_locales::create([
+            'news_si' => $data['sinhala'],
+            'news_en' => $data['english'],
+            'news_ta' => $data['tamil'],
+            'news_id' =>  $newsId,
+            'updated_at' => now(),
+            'created_at' => now(),
+        ]);
+        return response([
+            'news' => $news,
+            'news details' => $detailNews
+        ], 200);
+    }
+    public function getPublishedNewsCount()
+    {
+        return News::where('published', true)->count();
+    }
+    public function getComplainCount()
+    {
+        return Complain::count();
     }
 
 }

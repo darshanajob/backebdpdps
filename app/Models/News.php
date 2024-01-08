@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class news extends Model
 {
     use HasFactory;
+    protected $table = 'news';
     protected $fillable = [
         'visibility',
         'priority',
         'display_start_date',
         'display_end_date',
+        'published',
+
     ];
+    public function newsLocales()
+    {
+        return $this->hasMany(News_locales::class, 'news_id');
+    }
 }
-/*
-    1 (News) : 1 (NewsLocale)
-*/
